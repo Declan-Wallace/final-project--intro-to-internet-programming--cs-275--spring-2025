@@ -11,7 +11,7 @@ const sourcemaps = require(`gulp-sourcemaps`);
 
 // Include ESLint
 const lintJS = () => {
-    return src(`scripts/main.js`)
+    return src(`app/js/app.js`)
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -19,7 +19,7 @@ const lintJS = () => {
 
 // Include Stylelint
 const lintCSS = () => {
-    return src(`styles/main.css`)
+    return src(`app/css/style.css`)
         .pipe(
             stylelint({
                 reporters: [{ formatter: `string`, console: true }],
@@ -29,7 +29,7 @@ const lintCSS = () => {
 
 //JavaScript to ES5
 const transpileJSForProd = () => {
-    return src(`scripts/main.js`)
+    return src(`app/js/app.js`)
         .pipe(sourcemaps.init())
         .pipe(
             babel({
@@ -37,43 +37,45 @@ const transpileJSForProd = () => {
             })
         )
         .pipe(sourcemaps.write(`.`))
-        .pipe(dest(`prod/scripts`));
+        .pipe(dest(`prod/app/js`));
 };
 
 // Compress JavaScript
 const compressJS = () => {
-    return src(`scripts/main.js`)
+    return src(`app/js/app.js`)
         .pipe(
             babel({
                 presets: [`@babel/preset-env`],
             })
         )
         .pipe(uglify())
-        .pipe(dest(`prod/scripts`));
+        .pipe(dest(`prod/app/js`));
 };
 
 // Compress CSS
 const compressCSS = () => {
-    return src(`styles/main.css`)
+    return src(`app/css/style.css`)
         .pipe(cleanCSS())
-        .pipe(dest(`prod/styles`));
+        .pipe(dest(`prod/app/css`));
 };
 
 // Copy index.html to prod
 const copyHTML = () => {
-    return src(`index.html`).pipe(dest(`prod`));
+    return src(`app/html/index.html`).pipe(dest(`prod`));
 };
 
 // Create Serve
 const serve = () => {
     browserSync.init({
         server: {
-            baseDir: `./`,
+            baseDir: [ `./app`,
+                `./app/html`,
+            ]
         },
     });
-    watch(`scripts/main.js`, series(lintJS, transpileJSForProd)).on(`change`, browserSync.reload);
-    watch(`styles/main.css`, lintCSS).on(`change`, browserSync.reload);
-    watch(`index.html`).on(`change`, browserSync.reload);
+    watch(`app/js/*.js`, series(lintJS, transpileJSForProd)).on(`change`, browserSync.reload);
+    watch(`app/css/*.css`, lintCSS).on(`change`, browserSync.reload);
+    watch(`app/html/*.html`).on(`change`, browserSync.reload);
 };
 
 // Export serve
