@@ -7,7 +7,7 @@ const stylelint = require(`gulp-stylelint`);
 const browserSync = require(`browser-sync`).create();
 const sourcemaps = require(`gulp-sourcemaps`);
 
-// Include validateHTML, validateCSS, validateJS, compressHTML, compressCSS, transpileJSForDev
+// Have to make validateHTML, validateCSS, validateJS, compressHTML, compressCSS, transpileJSForDev
 
 // Include ESLint
 const lintJS = () => {
