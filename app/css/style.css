@@ -4,6 +4,7 @@
   border: 1px solid black;
   font-family: 'Courier New', Courier, monospace;
   white-space: pre;
+  font-weight: 700;
 }
 
 /* Remove default spacing */
