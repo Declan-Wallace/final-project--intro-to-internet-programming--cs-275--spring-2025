@@ -1,31 +1,18 @@
+/* Create the diamond container */
+#diamond-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 8px;
+  border: 1px solid black;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre;
+}
+
+/* Remove default spacing */
+html,
 body {
   margin: 0;
   padding: 0;
-}
-
-/* position the entire diamond UI at the top‐left */
-#diamond-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 1rem;
-}
-
-/* Input box and generate button  */
-#size-input,
-#generate-btn {
-  display: block;
-  margin-bottom: .5rem;
-  font-family: monospace;
-}
-
-/* make output box change for diamond’s dimensions */
-#diamond-output {
-  display: inline-block;
-  background-color: white;
-  border: 1px solid black;
-  padding: 1rem;
-  font-family: 'Courier New', Courier, monospace;
-  line-height: 1;
-  white-space: pre;
+  overflow: hidden;
 }
