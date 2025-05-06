@@ -3,7 +3,6 @@ const printDiamond = size => {
     const outputContainer = document.getElementById(`diamond-output`);
     outputContainer.innerHTML = ``;
     if (size % 2 !== 0) {
-        outputContainer.innerHTML += `<div>Diamond with a size of ${size}:</div>`;
         let space = Math.floor(size / 2);
         let stars = 1;
         // Upper half (including middle line)
@@ -23,7 +22,6 @@ const printDiamond = size => {
 
     // Create an Even Diamond
     } else {
-        outputContainer.innerHTML += `<div>Diamond with a size of ${size}:</div>`;
         // Top single asterisk
         outputContainer.innerHTML += `<div>${` `.repeat(size - 1)}* </div>`;
         let space = size / 2;
