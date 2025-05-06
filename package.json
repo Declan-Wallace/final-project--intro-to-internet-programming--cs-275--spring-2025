@@ -7,14 +7,16 @@
     "build": "gulp build"
   },
   "devDependencies": {
+    "@babel/core": "^7.x.x",
+    "@babel/preset-env": "^7.x.x",
+    "browser-sync": "^2.x.x",
     "gulp": "4.0.2",
     "gulp-babel": "^8.x.x",
     "gulp-clean-css": "^4.x.x",
     "gulp-eslint": "^6.x.x",
+    "gulp-htmlhint": "^4.0.2",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-stylelint": "^13.x.x",
-    "browser-sync": "^2.x.x",
-    "gulp-uglify": "^3.x.x",
-    "@babel/core": "^7.x.x",
-    "@babel/preset-env": "^7.x.x"
+    "gulp-uglify": "^3.x.x"
   }
 }
