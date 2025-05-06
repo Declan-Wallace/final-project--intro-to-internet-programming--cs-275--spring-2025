@@ -1,6 +1,9 @@
+// Hide any input or button elements
+document.querySelectorAll(`input, button`).forEach(el => el.style.display = `none`);
+
 // Create an Odd Diamond
 const printDiamond = size => {
-    const outputContainer = document.getElementById(`diamond-output`);
+    const outputContainer = document.getElementById(`diamond-container`);
     outputContainer.innerHTML = ``;
     if (size % 2 !== 0) {
         let space = Math.floor(size / 2);
@@ -28,13 +31,19 @@ const printDiamond = size => {
         let stars = 1;
         // Upper half
         for (let i = 0; i < size / 2; i++) {
-            outputContainer.innerHTML += `<div>${` `.repeat(space * 2)}${`* `.repeat(stars - 1)}</div>`;
+            const starRow = `* `.repeat(stars - 1);
+            if (starRow) {
+                outputContainer.innerHTML += `<div>${` `.repeat(space * 2)}${starRow}</div>`;
+            }
             space--;
             stars += 2;
         }
         // Lower half
         for (let i = 0; i < size / 2; i++) {
-            outputContainer.innerHTML += `<div>${` `.repeat(space * 2)}${`* `.repeat(stars - 1)}</div>`;
+            const starRow = `* `.repeat(stars - 1);
+            if (starRow) {
+                outputContainer.innerHTML += `<div>${` `.repeat(space * 2)}${starRow}</div>`;
+            }
             space++;
             stars -= 2;
         }
@@ -42,9 +51,6 @@ const printDiamond = size => {
         outputContainer.innerHTML += `<div>${` `.repeat(size - 1)}* </div>`;
     }
 };
-
-// Hide any input or button elements
-document.querySelectorAll(`input, button`).forEach(el => el.style.display = `none`);
 
 // Prompt the user for the diamond size
 const answer = window.prompt(`Enter the size of your diamond as a number.`);
@@ -54,11 +60,28 @@ const size = parseInt(answer, 10);
 if (isNaN(size) || size < 1) {
     window.alert(`Please reload and enter a positive integer.`);
 } else {
-    let outputContainer = document.getElementById(`diamond-output`);
-    if (!outputContainer) {
-        outputContainer = document.createElement(`pre`);
-        outputContainer.id = `diamond-output`;
-        document.getElementById(`diamond-container`).appendChild(outputContainer);
-    }
     printDiamond(size);
+
+    // Slide the container left to right
+    const outputContainer = document.getElementById(`diamond-container`);
+    let pos = parseInt(window.getComputedStyle(outputContainer).left, 10);
+    if (isNaN(pos)) pos = 0;
+    const speed = 2.5;
+    let dir = 1;
+    const slide = () => {
+        pos += speed * dir;
+        const max = window.innerWidth - outputContainer.offsetWidth;
+        if (pos <= 0) {
+            pos = 0;
+            dir = 1;
+        } else if (pos >= max) {
+            pos = max;
+            dir = -1;
+        }
+        outputContainer.style.left = `${pos}px`;
+        window.requestAnimationFrame(slide);
+    };
+
+    // Start the sliding animation
+    window.requestAnimationFrame(slide);
 }
