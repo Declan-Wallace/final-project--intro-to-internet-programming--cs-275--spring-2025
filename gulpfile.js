@@ -37,7 +37,7 @@ const transpileJSForProd = () => {
             })
         )
         .pipe(sourcemaps.write(`.`))
-        .pipe(dest(`prod/app/js`));
+        .pipe(dest(`prod/js`));
 };
 
 // Compress JavaScript
@@ -49,14 +49,14 @@ const compressJS = () => {
             })
         )
         .pipe(uglify())
-        .pipe(dest(`prod/app/js`));
+        .pipe(dest(`prod/js`));
 };
 
 // Compress CSS
 const compressCSS = () => {
     return src(`app/css/style.css`)
         .pipe(cleanCSS())
-        .pipe(dest(`prod/app/css`));
+        .pipe(dest(`prod/css`));
 };
 
 // Copy index.html to prod
