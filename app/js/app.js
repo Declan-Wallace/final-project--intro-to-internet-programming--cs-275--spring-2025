@@ -1,6 +1,3 @@
-// Hide any input or button elements
-document.querySelectorAll(`input, button`).forEach(el => el.style.display = `none`);
-
 // Create an Odd Diamond
 const printDiamond = size => {
     const outputContainer = document.getElementById(`diamond-container`);
