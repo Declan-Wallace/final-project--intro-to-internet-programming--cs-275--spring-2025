@@ -21,7 +21,7 @@ const printDiamond = size => {
             stars -= 2;
         }
 
-    //Create an Even Diamond
+    // Create an Even Diamond
     } else {
         outputContainer.innerHTML += `<div>Diamond with a size of ${size}:</div>`;
         // Top single asterisk
@@ -45,30 +45,22 @@ const printDiamond = size => {
     }
 };
 
-// build the UI inside #diamond-container
-const container = document.getElementById(`diamond-container`);
+// Hide any input or button elements
+document.querySelectorAll(`input, button`).forEach(el => el.style.display = `none`);
 
-const sizeInput = document.createElement(`input`);
-sizeInput.id = `size-input`;
-sizeInput.type = `text`;
-sizeInput.placeholder = `Enter diamond size`;
+// Prompt the user for the diamond size
+const answer = window.prompt(`Enter the size of your diamond as a number.`);
+const size = parseInt(answer, 10);
 
-const generateButton = document.createElement(`button`);
-generateButton.id = `generate-btn`;
-generateButton.textContent = `Generate`;
-
-const outputContainer = document.createElement(`pre`);
-outputContainer.id = `diamond-output`;
-
-container.appendChild(sizeInput);
-container.appendChild(generateButton);
-container.appendChild(outputContainer);
-
-generateButton.addEventListener(`click`, () => {
-    const size = parseInt(sizeInput.value, 10);
-    if (!isNaN(size)) {
-        printDiamond(size);
-    } else {
-        outputContainer.innerHTML = `<div>Error, please enter a number</div>`;
+// Validate and generate the Diamond
+if (isNaN(size) || size < 1) {
+    window.alert(`Please reload and enter a positive integer.`);
+} else {
+    let outputContainer = document.getElementById(`diamond-output`);
+    if (!outputContainer) {
+        outputContainer = document.createElement(`pre`);
+        outputContainer.id = `diamond-output`;
+        document.getElementById(`diamond-container`).appendChild(outputContainer);
     }
-});
+    printDiamond(size);
+}
