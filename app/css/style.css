@@ -1,9 +1,6 @@
 /* Create the diamond container */
 #diamond-container {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 8px;
   border: 1px solid black;
   font-family: 'Courier New', Courier, monospace;
   white-space: pre;
